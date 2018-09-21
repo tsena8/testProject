@@ -1,7 +1,7 @@
 package com.tsena.mastermind.test;
 
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,10 +31,12 @@ public class GameServiceTest {
 	public void testInitializeGame() {
 		try {
 			gameService.initializeGame("123");
+			assertTrue(true);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			assertTrue(false);
 		}
 		
 		
