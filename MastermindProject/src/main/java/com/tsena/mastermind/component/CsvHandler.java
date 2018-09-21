@@ -21,6 +21,11 @@ import com.tsena.mastermind.constant.PegColor;
 import com.tsena.mastermind.model.GameModel;
 import com.tsena.mastermind.model.HistoryLine;
 
+/**
+ * Class for CSV file methods. We use CSV file structure and log4j library to log the game session and interactions 
+ * @author tsena
+ *
+ */
 @Component
 public class CsvHandler {
 
@@ -29,6 +34,13 @@ public class CsvHandler {
 	@Value("${application.log.folder}")
 	private String logFolderPath;
 	
+	/**
+	 * Read game session form game_session.csv file. 
+	 * The current one is the last line in the file.
+	 * For this purpose we use ReversedLinesFileReader.
+	 * @return GameModel object
+	 * @throws Exception
+	 */
 	public GameModel readGameSession() throws Exception {
 		GameModel gameModel = new GameModel();
 		
@@ -72,6 +84,13 @@ public class CsvHandler {
 		}
 	}
 	
+	/**
+	 * Read game interactions form game_interaction.csv file. 
+	 * @param gameId - unique id of the current game
+	 * @param codeMasterCombination - codemaster color combination
+	 * @return List<HistoryLine> - list of the game history
+	 * @throws Exception
+	 */
 	public List<HistoryLine> readGameInteractions(String gameId, String codeMasterCombination) throws Exception {
 		List<HistoryLine> list = new ArrayList<HistoryLine>();
 		CSVReader reader;

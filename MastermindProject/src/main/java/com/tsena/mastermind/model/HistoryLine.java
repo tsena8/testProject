@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * Class for holding data of game history model
+ * @author tsena
+ *
+ */
 @Component
 public class HistoryLine implements Serializable {
 

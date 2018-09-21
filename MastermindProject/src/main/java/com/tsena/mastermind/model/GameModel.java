@@ -6,7 +6,7 @@ import com.tsena.mastermind.constant.AppDefault.FeedbackType;
 import com.tsena.mastermind.constant.PegColor;
 
 /**
- * Java class for holding data of Mastermind game model
+ * Class for holding data of Mastermind game model
  * @author tsena
  *
  */
