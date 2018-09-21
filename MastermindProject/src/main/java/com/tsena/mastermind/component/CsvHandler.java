@@ -39,13 +39,13 @@ public class CsvHandler {
 			object = new ReversedLinesFileReader(file, Charset.defaultCharset());
 			String lastLine = object.readLine();
 			
-			String[] csvValues = lastLine.split("\\|");
+			String[] csvValues = lastLine.split(AppDefault.CSV_SEPARATION);
 			if (csvValues == null || csvValues.length!=3) {
 				throw new Exception("Session CSV record is not correct: " + csvValues.length + " >> " + csvValues);
 			}
 			
 			gameModel.setGameId(csvValues[1]);
-			String[] pegColorNames = csvValues[2].split("\\,");
+			String[] pegColorNames = csvValues[2].split(AppDefault.COLOR_SEPARATION);
 			
 			if (pegColorNames == null || pegColorNames.length!=4) {
 				throw new Exception("Peg colors were saved not correclty");
@@ -60,48 +60,52 @@ public class CsvHandler {
 			return gameModel;
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw e;
 		} finally {
 			try {
 				object.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				throw e;
 			}
 		}
 	}
 	
-	public List<HistoryLine> readGameInteractions(String gameId) throws Exception {
-		GameModel gameModel = new GameModel();
+	public List<HistoryLine> readGameInteractions(String gameId, String codeMasterCombination) throws Exception {
 		List<HistoryLine> list = new ArrayList<HistoryLine>();
 		CSVReader reader;
 		String fileName = logFolderPath.concat(File.separator).concat(AppDefault.INTERACTION_CSV);
+		
+		logger.debug("   CSV to read: " +  fileName);
 		try {
-			reader = new CSVReader(new FileReader(fileName), '|');
-
+			
+			reader = new CSVReader(new FileReader(fileName), AppDefault.CSV_SEPARATION_CHAR);
 			String[] record = null;
 
 			while ((record = reader.readNext()) != null) {
-
 				if (record.length != 4 || !record[1].equals(gameId))
-					break;
+					continue;
 
 				HistoryLine line = new HistoryLine();
+				line.setGameId(gameId);
 				line.setDate(record[0].trim());
-				line.setCodeGuess(record[1].trim());
-				line.setFeedback(record[2].trim());
+				line.setCodeMasterCombination(codeMasterCombination);
+				line.setGuessCombination(record[2].trim());
+				line.setFeedback(record[3].trim());
 				list.add(line);
+				logger.debug("  History line: " + line);
 			}
 			
 			reader.close();
+			logger.debug(" ...  before return " );
 			return list;
 		} catch (FileNotFoundException fne) {
-			logger.error("CSV file not found: " + fileName);
+			logger.error("!!! CSV file not found: " + fileName);
+			throw new Exception("CSV file not found: " + fileName);
 		} catch (IOException ioe) {
-			logger.error("***Error I/O reading file: " + fileName);
+			logger.error("!!! Error I/O reading file: " + fileName);
+			throw new Exception("Error I/O reading file: " + fileName);
 		}
 	}
 }

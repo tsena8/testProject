@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tsena.mastermind.component.PegColorConverter;
 import com.tsena.mastermind.constant.PegColor;
+import com.tsena.mastermind.model.HistoryLine;
 import com.tsena.mastermind.service.GameService;
+import com.tsena.mastermind.service.HistoryService;
 
 /**
  * Rest API Spring controller class
@@ -33,6 +35,9 @@ public class GameController {
 
 	@Autowired
 	private GameService gameService;
+	
+	@Autowired
+	private HistoryService historyService;
 
 	
 	/**
@@ -92,16 +97,18 @@ public class GameController {
 	}
 	
 	/**
-	 * Get method to receive the last game's history
+	 * Get method to receive the last game's historyreadGameInteractions
 	 * @return ResponseEntity
 	 */
 	@RequestMapping(value = "/history", method = RequestMethod.GET)
-	public ResponseEntity<List<String>> getHistory() {
+	public ResponseEntity<List<HistoryLine>> getHistory() {
+		logger.debug(" >>> REST API getHistory"); 
 		try {
-			List<String> history = gameService.getHistory();
-			return new ResponseEntity<List<String>>(history, HttpStatus.OK);
+			List<HistoryLine> history = historyService.getHistory();
+			return new ResponseEntity<List<HistoryLine>>(history, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<List<String>>(Arrays.asList(e.getMessage()), HttpStatus.BAD_REQUEST);
+			return null;
+//			return new ResponseEntity<List<HistoryLine>>(null, HttpStatus.SERVICE_UNAVAILABLE);
 		}
 	
 	}

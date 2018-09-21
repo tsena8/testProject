@@ -14,6 +14,7 @@ public interface HistoryService {
 	/**
 	 * method that generates history of the last game
 	 * @return List<String>
+	 * @throws Exception
 	 */
-	public List<HistoryLine> getHistory();
+	public List<HistoryLine> getHistory() throws Exception;
 }

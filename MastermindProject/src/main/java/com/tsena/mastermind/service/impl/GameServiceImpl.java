@@ -76,7 +76,7 @@ public class GameServiceImpl implements GameService {
 		
 		logService.logInteraction(gameModel);
 		
-		String returnStr  = feedback.stream().map(Object::toString).collect(Collectors.joining(","));
+		String returnStr  = feedback.stream().map(Object::toString).collect(Collectors.joining(AppDefault.COLOR_SEPARATION));
 		
 		logger.debug(" >> feedbackStr: " + returnStr);
 		

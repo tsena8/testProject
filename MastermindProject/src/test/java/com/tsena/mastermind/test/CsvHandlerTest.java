@@ -24,12 +24,25 @@ public class CsvHandlerTest {
 	public void readLastGameTest() {
 		try {
 			GameModel gameModel = csvHandler.readGameSession();
-			assertEquals(PegColor.RED, gameModel.getCodemakerColorRow().get(0));
-			assertEquals(PegColor.VIOLET, gameModel.getCodemakerColorRow().get(3));
+			assertTrue(contains(gameModel.getCodemakerColorRow().get(0)));
+			assertTrue(contains(gameModel.getCodemakerColorRow().get(1)));
+			assertTrue(contains(gameModel.getCodemakerColorRow().get(2)));
+			assertTrue(contains(gameModel.getCodemakerColorRow().get(3)));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			assertTrue(false);
 		}
+	}
+	
+	private static boolean contains(PegColor color) {
+
+	    for (PegColor enumValue : PegColor.values()) {
+	        if (enumValue.name().equals(color)) {
+	            return true;
+	        }
+	    }
+
+	    return false;
 	}
 }

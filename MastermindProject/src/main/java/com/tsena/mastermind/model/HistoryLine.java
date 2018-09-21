@@ -11,8 +11,8 @@ public class HistoryLine implements Serializable {
 		
 		private String gameId;
 		private String date;
-		private String codeMaster;
-		private String codeGuess;
+		private String codeMasterCombination;
+		private String guessCombination;
 		private String feedback;
 		
 		public String getGameId() {
@@ -21,23 +21,24 @@ public class HistoryLine implements Serializable {
 		public void setGameId(String gameId) {
 			this.gameId = gameId;
 		}
-		public String getCodeMaster() {
-			return codeMaster;
-		}
-		public void setCodeMaster(String codeMaster) {
-			this.codeMaster = codeMaster;
-		}
 		public String getDate() {
 			return date;
 		}
 		public void setDate(String date) {
 			this.date = date;
 		}
-		public String getCodeGuess() {
-			return codeGuess;
+		
+		public String getCodeMasterCombination() {
+			return codeMasterCombination;
 		}
-		public void setCodeGuess(String codeGuess) {
-			this.codeGuess = codeGuess;
+		public void setCodeMasterCombination(String codeMasterCombination) {
+			this.codeMasterCombination = codeMasterCombination;
+		}
+		public String getGuessCombination() {
+			return guessCombination;
+		}
+		public void setGuessCombination(String guessCombination) {
+			this.guessCombination = guessCombination;
 		}
 		public String getFeedback() {
 			return feedback;

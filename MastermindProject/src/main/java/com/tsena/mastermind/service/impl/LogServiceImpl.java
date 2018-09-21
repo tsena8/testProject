@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.tsena.mastermind.component.log.LogGameInteraction;
 import com.tsena.mastermind.component.log.LogGameSession;
+import com.tsena.mastermind.constant.AppDefault;
 import com.tsena.mastermind.model.GameModel;
 import com.tsena.mastermind.service.LogService;
 
@@ -24,15 +25,15 @@ public class LogServiceImpl implements LogService {
 
 	@Override
 	public void logSession(String gameId, GameModel newGame) {
-		String colorRowStr = newGame.getCodemakerColorRow().stream().map(Enum::name).collect(Collectors.joining(","));
+		String colorRowStr = newGame.getCodemakerColorRow().stream().map(Enum::name).collect(Collectors.joining(AppDefault.COLOR_SEPARATION));
 		logGameSession.trace(gameId, colorRowStr);
 		
 	}
 
 	@Override
 	public void logInteraction(GameModel interaction) {
-		String colorRowStr = interaction.getGuessColorRow().stream().map(Enum::name).collect(Collectors.joining(","));
-		String feedbackStr = interaction.getFeedback().stream().map(Enum::name).collect(Collectors.joining(","));
+		String colorRowStr = interaction.getGuessColorRow().stream().map(Enum::name).collect(Collectors.joining(AppDefault.COLOR_SEPARATION));
+		String feedbackStr = interaction.getFeedback().stream().map(Enum::name).collect(Collectors.joining(AppDefault.COLOR_SEPARATION));
 		
 		logger.debug(" -- gameId: "  + interaction.getGameId());
 		logger.debug(" -- colorRowStr: "  + colorRowStr);
