@@ -2,7 +2,6 @@ package com.tsena.mastermind.api.controller;
 
 import static java.util.Arrays.asList;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 

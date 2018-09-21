@@ -77,7 +77,6 @@ public class CsvHandler {
 		CSVReader reader;
 		String fileName = logFolderPath.concat(File.separator).concat(AppDefault.INTERACTION_CSV);
 		
-		logger.debug("   CSV to read: " +  fileName);
 		try {
 			
 			reader = new CSVReader(new FileReader(fileName), AppDefault.CSV_SEPARATION_CHAR);
@@ -94,7 +93,6 @@ public class CsvHandler {
 				line.setGuessCombination(record[2].trim());
 				line.setFeedback(record[3].trim());
 				list.add(line);
-				logger.debug("  History line: " + line);
 			}
 			
 			reader.close();

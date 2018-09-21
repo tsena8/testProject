@@ -13,7 +13,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.tsena.mastermind.api.config.ApplicationConfig;
 import com.tsena.mastermind.service.GameService;
 
-
+/**
+ * Test class to run Junit ests for Game Service
+ * @author tsena
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ApplicationConfig.class})
 public class GameServiceTest {
@@ -27,6 +31,10 @@ public class GameServiceTest {
 				this.gameService.getClass().toString());
 	}
 	
+	/**
+	 * test method of game initialize method in the Game service
+	 * Expected the method initializeGame executes without exception 
+	 */
 	@Test 
 	public void testInitializeGame() {
 		try {
