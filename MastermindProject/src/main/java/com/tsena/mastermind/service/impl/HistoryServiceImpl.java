@@ -25,12 +25,8 @@ public class HistoryServiceImpl implements HistoryService {
 
 		GameModel gameModel = csvHandler.readGameSession();
 		
-		logger.debug(" >>> gameModel: " + gameModel.getGameId());
-		
 		String codeMasterCombination = gameModel.getCodemakerColorRow().stream().map(Enum::name).collect(Collectors.joining(AppDefault.COLOR_SEPARATION));
-		logger.debug(" >>> codeMasterCombination: " + codeMasterCombination);
 		List<HistoryLine> historyList = csvHandler.readGameInteractions(gameModel.getGameId(), codeMasterCombination);
-		logger.debug("After readGameInteractions : " + historyList!=null? historyList.get(0).getGuessCombination(): "");
 		
 		return historyList;
 	}

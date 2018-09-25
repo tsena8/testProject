@@ -97,7 +97,6 @@ public class CsvHandler {
 		String fileName = logFolderPath.concat(File.separator).concat(AppDefault.INTERACTION_CSV);
 		
 		try {
-			
 			reader = new CSVReader(new FileReader(fileName), AppDefault.CSV_SEPARATION_CHAR);
 			String[] record = null;
 
@@ -115,7 +114,6 @@ public class CsvHandler {
 			}
 			
 			reader.close();
-			logger.debug(" ...  before return " );
 			return list;
 		} catch (FileNotFoundException fne) {
 			logger.error("!!! CSV file not found: " + fileName);

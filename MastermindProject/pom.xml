@@ -39,6 +39,16 @@
             <version>${springframework.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>${jackson.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -87,9 +97,6 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-				<includes>
-		            <include>log4j.properties</include>
-		        </includes>  
 				<filtering>true</filtering>
 			</resource>
 		</resources>
