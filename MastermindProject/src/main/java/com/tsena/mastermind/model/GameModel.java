@@ -1,5 +1,6 @@
 package com.tsena.mastermind.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.tsena.mastermind.constant.AppDefault.FeedbackType;
@@ -14,6 +15,8 @@ public class GameModel {
 	
 	private String gameId;
 	
+	private Date date;
+	
 	private List<PegColor> codemakerColorRow;
 	
 	private List<PegColor> guessColorRow;
@@ -26,6 +29,14 @@ public class GameModel {
 
 	public void setGameId(String gameId) {
 		this.gameId = gameId;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public List<PegColor> getCodemakerColorRow() {

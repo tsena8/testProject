@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tsena.mastermind.component.PegColorConverter;
 import com.tsena.mastermind.constant.PegColor;
-import com.tsena.mastermind.model.HistoryLine;
+import com.tsena.mastermind.model.HistoryModel;
+import com.tsena.mastermind.model.ResponseModel;
 import com.tsena.mastermind.service.GameService;
 import com.tsena.mastermind.service.HistoryService;
 
@@ -61,7 +62,6 @@ public class GameController {
 	 */
 	@RequestMapping(value = "/send/{peg}", method = RequestMethod.GET)
 	public ResponseEntity<String> giveFeedbackOne(@PathVariable(value = "peg") PegColor peg) {
-		logger.debug(" >>> " + peg);
 		try {
 			return new ResponseEntity<String>("OK", HttpStatus.OK);
 		} catch (Exception e) {
@@ -84,7 +84,6 @@ public class GameController {
 			@PathVariable(value = "peg3") PegColor peg3,
 			@PathVariable(value = "peg4") PegColor peg4 ) {
 
-		logger.debug(" >>> " + peg1 + " | " +  peg2 + " | " + peg3 + " | " +  peg4);
 		List<PegColor> pegs = asList(peg1, peg2, peg3, peg4);
 		try {
 			String feedback = gameService.giveFeedback(pegs);
@@ -99,15 +98,21 @@ public class GameController {
 	 * Get method to receive the last game's historyreadGameInteractions
 	 * @return ResponseEntity
 	 */
-	@RequestMapping(value = "/history", method = RequestMethod.GET)
-	public ResponseEntity<List<HistoryLine>> getHistory() {
-		logger.debug(" >>> REST API getHistory"); 
+	@RequestMapping(value = "/history", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<Object> getHistory() {
+		ResponseModel response = new ResponseModel();
+		
 		try {
-			List<HistoryLine> history = historyService.getHistory();
-			return new ResponseEntity<List<HistoryLine>>(history, HttpStatus.OK);
+			HistoryModel history = historyService.getHistory();
+			response.setSuccess(true);
+			response.setData(history);
+			return new ResponseEntity<Object>(response, HttpStatus.OK);
 		} catch (Exception e) {
-			return null;
-//			return new ResponseEntity<List<HistoryLine>>(null, HttpStatus.SERVICE_UNAVAILABLE);
+			logger.error(e.getMessage(),e);
+			response.setSuccess(false);
+			response.setMessage(e.getMessage());
+			
+			return new ResponseEntity<Object>(response,HttpStatus.SERVICE_UNAVAILABLE);
 		}
 	
 	}

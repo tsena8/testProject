@@ -54,12 +54,9 @@ public class GameServiceImpl implements GameService {
 	public String giveFeedback(List<PegColor> guessPegs) throws Exception {
 		
 		GameModel gameModel = csvHandler.readGameSession();
-		logger.debug(" >> gameId: " + gameModel.getGameId());
 		
 		gameModel.setGuessColorRow(guessPegs);
 		List<PegColor> cmakerPegColors = gameModel.getCodemakerColorRow(); 
-		
-		logger.debug(" >> cmakerPegColors: " + cmakerPegColors);
 		
 		List<FeedbackType> feedback  = new ArrayList<FeedbackType>();
 		
@@ -70,16 +67,10 @@ public class GameServiceImpl implements GameService {
 		    	feedback.add(AppDefault.FeedbackType.WHITE);
 		    }
 		}
-		logger.debug(" >> feedback: " + feedback);
-		
 		gameModel.setFeedback(feedback);
-		
 		logService.logInteraction(gameModel);
 		
 		String returnStr  = feedback.stream().map(Object::toString).collect(Collectors.joining(AppDefault.COLOR_SEPARATION));
-		
-		logger.debug(" >> feedbackStr: " + returnStr);
-		
 		return returnStr;
 	}
 

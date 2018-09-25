@@ -21,7 +21,7 @@ public class LogGameSession extends LogResult implements ILogResult {
 
 
 	public void trace(String gameId, String message1, String message2) {
-		// TODO Auto-generated method stub
+		trace(logger, gameId, message1, message2);
 		
 	}
 	

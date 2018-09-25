@@ -1,6 +1,8 @@
 package com.tsena.mastermind.model;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -10,15 +12,14 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class HistoryLine implements Serializable {
+public class HistoryModel implements Serializable {
 
 		private static final long serialVersionUID = 1L;
 		
 		private String gameId;
-		private String date;
+		private Date date;
 		private String codeMasterCombination;
-		private String guessCombination;
-		private String feedback;
+		private List<GuessModel> guessCombination;
 		
 		public String getGameId() {
 			return gameId;
@@ -26,30 +27,23 @@ public class HistoryLine implements Serializable {
 		public void setGameId(String gameId) {
 			this.gameId = gameId;
 		}
-		public String getDate() {
+		public Date getDate() {
 			return date;
 		}
-		public void setDate(String date) {
+		public void setDate(Date date) {
 			this.date = date;
 		}
-		
 		public String getCodeMasterCombination() {
 			return codeMasterCombination;
 		}
 		public void setCodeMasterCombination(String codeMasterCombination) {
 			this.codeMasterCombination = codeMasterCombination;
 		}
-		public String getGuessCombination() {
+		public List<GuessModel> getGuessCombination() {
 			return guessCombination;
 		}
-		public void setGuessCombination(String guessCombination) {
+		public void setGuessCombination(List<GuessModel> guessCombination) {
 			this.guessCombination = guessCombination;
-		}
-		public String getFeedback() {
-			return feedback;
-		}
-		public void setFeedback(String feedback) {
-			this.feedback = feedback;
 		}
 		
 }

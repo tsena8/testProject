@@ -1,8 +1,6 @@
 package com.tsena.mastermind.service;
 
-import java.util.List;
-
-import com.tsena.mastermind.model.HistoryLine;
+import com.tsena.mastermind.model.HistoryModel;
 
 /**
  * Class for services for getting history of the game
@@ -13,8 +11,8 @@ public interface HistoryService {
 
 	/**
 	 * method that generates history of the last game
-	 * @return List<String>
+	 * @return HistoryModel
 	 * @throws Exception
 	 */
-	public List<HistoryLine> getHistory() throws Exception;
+	public HistoryModel getHistory() throws Exception;
 }

@@ -34,11 +34,6 @@ public class LogServiceImpl implements LogService {
 	public void logInteraction(GameModel interaction) {
 		String colorRowStr = interaction.getGuessColorRow().stream().map(Enum::name).collect(Collectors.joining(AppDefault.COLOR_SEPARATION));
 		String feedbackStr = interaction.getFeedback().stream().map(Enum::name).collect(Collectors.joining(AppDefault.COLOR_SEPARATION));
-		
-		logger.debug(" -- gameId: "  + interaction.getGameId());
-		logger.debug(" -- colorRowStr: "  + colorRowStr);
-		logger.debug(" -- feedbackStr: "  + feedbackStr);
-		
 		logGameInteraction.trace(interaction.getGameId(), colorRowStr, feedbackStr);
 		
 	}
