@@ -5,14 +5,14 @@ import java.util.List;
 import com.tsena.mastermind.constant.PegColor;
 
 /**
- * Class for services for the game
+ * Interface that holds service of game actions
  * @author tsena
  *
  */
 public interface GameService {
 
 	/**
-	 * method to initilize a new game
+	 * Method that initialize a new game randomly picking the colors
 	 * @param gameId - unique id
 	 * @throws Exception
 	 */

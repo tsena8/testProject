@@ -1,14 +1,17 @@
 package com.tsena.mastermind.test;
 
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.UUID;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.tsena.mastermind.api.config.ApplicationConfig;
 import com.tsena.mastermind.service.GameService;
@@ -20,6 +23,7 @@ import com.tsena.mastermind.service.GameService;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ApplicationConfig.class})
+@WebAppConfiguration
 public class GameServiceTest {
 
 	@Autowired
@@ -38,11 +42,11 @@ public class GameServiceTest {
 	@Test 
 	public void testInitializeGame() {
 		try {
-			gameService.initializeGame("123");
+			String gameId = UUID.randomUUID().toString();
+			gameService.initializeGame(gameId);
 			assertTrue(true);
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			assertTrue(false);
 		}

@@ -24,9 +24,9 @@ public class LogServiceImpl implements LogService {
 	private LogGameInteraction logGameInteraction;
 
 	@Override
-	public void logSession(String gameId, GameModel newGame) {
+	public void logSession(GameModel newGame) {
 		String colorRowStr = newGame.getCodemakerColorRow().stream().map(Enum::name).collect(Collectors.joining(AppDefault.COLOR_SEPARATION));
-		logGameSession.trace(gameId, colorRowStr);
+		logGameSession.trace(newGame.getGameId(), colorRowStr);
 		
 	}
 

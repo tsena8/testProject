@@ -14,28 +14,15 @@ import com.tsena.mastermind.constant.AppDefault;
 import com.tsena.mastermind.constant.AppDefault.FeedbackType;
 import com.tsena.mastermind.model.GameModel;
 import com.tsena.mastermind.service.GameService;
-import com.tsena.mastermind.service.LogService;
 
-/**
- * Interface that holds service of game actions
- * @author tsena
- *
- */
 @Service("GameService")
 public class GameServiceImpl implements GameService {
 
 	private static final Logger logger = Logger.getLogger(GameServiceImpl.class);
 	
 	@Autowired
-	private LogService logService;
-
-	@Autowired
 	private CsvHandler csvHandler;
 	
-	/**
-	 * Method that initialize a new game randomly picking the colors 
-	 * @param gameId - unique id
-	 */
 	@Override
 	public void initializeGame(String gameId) throws Exception {
 		
@@ -46,8 +33,10 @@ public class GameServiceImpl implements GameService {
 		*/
 		List<PegColor> colors = PegColor.getRandom2Duplicates();
 		
+		gameModel.setGameId(gameId);
 		gameModel.setCodemakerColorRow(colors);
-		logService.logSession(gameId, gameModel);
+		csvHandler.logGameSession(gameModel);
+		
 	}
 
 	@Override
@@ -68,7 +57,8 @@ public class GameServiceImpl implements GameService {
 		    }
 		}
 		gameModel.setFeedback(feedback);
-		logService.logInteraction(gameModel);
+		csvHandler.logGameInteraction(gameModel);
+		
 		
 		String returnStr  = feedback.stream().map(Object::toString).collect(Collectors.joining(AppDefault.COLOR_SEPARATION));
 		return returnStr;

@@ -11,10 +11,9 @@ public interface LogService {
 
 	/**
 	 * method that logs game session
-	 * @param gameId - game id 
 	 * @param newGame - game model 
 	 */
-	public void logSession(String gameId, GameModel newGame);
+	public void logSession(GameModel newGame);
 	
 	/**
 	 * method that logs game interaction

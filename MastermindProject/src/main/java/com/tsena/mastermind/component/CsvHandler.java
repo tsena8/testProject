@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.input.ReversedLinesFileReader;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,7 @@ import com.tsena.mastermind.constant.PegColor;
 import com.tsena.mastermind.model.GameModel;
 import com.tsena.mastermind.model.GuessModel;
 import com.tsena.mastermind.model.HistoryModel;
+import com.tsena.mastermind.service.LogService;
 
 /**
  * Class for CSV file methods. We use CSV file structure and log4j library to log the game session and interactions 
@@ -35,10 +37,29 @@ public class CsvHandler {
 
 	private static final Logger logger = Logger.getLogger(CsvHandler.class);
 			
+	@Autowired
+	private LogService logService;
+	
 	@Value("${application.log.folder}")
 	private String logFolderPath;
 	
 	private final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+	
+	/**
+	 * method that calls to log session from component
+	 * @param newGame - game model 
+	 */
+	public void logGameSession(GameModel gameModel) throws Exception {
+		logService.logSession(gameModel);
+	}
+	
+	/**
+	 * method that calls to log interaction from component
+	 * @param newGame - game model 
+	 */
+	public void logGameInteraction(GameModel gameModel) throws Exception {
+		logService.logInteraction(gameModel);
+	}
 	
 	/**
 	 * Read game session form game_session.csv file. 

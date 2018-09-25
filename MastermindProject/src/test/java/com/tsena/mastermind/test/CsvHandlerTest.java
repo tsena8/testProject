@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.tsena.mastermind.api.config.ApplicationConfig;
 import com.tsena.mastermind.component.CsvHandler;
@@ -20,6 +21,7 @@ import com.tsena.mastermind.model.GameModel;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ApplicationConfig.class})
+@WebAppConfiguration
 public class CsvHandlerTest {
 
 	@Autowired
