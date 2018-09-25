@@ -59,7 +59,6 @@ public class GameServiceImpl implements GameService {
 		gameModel.setFeedback(feedback);
 		csvHandler.logGameInteraction(gameModel);
 		
-		
 		String returnStr  = feedback.stream().map(Object::toString).collect(Collectors.joining(AppDefault.COLOR_SEPARATION));
 		return returnStr;
 	}

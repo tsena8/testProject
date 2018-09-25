@@ -1,7 +1,6 @@
 package com.tsena.mastermind.model;
 
 import java.io.Serializable;
-
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,6 +16,7 @@ public class ResponseModel implements Serializable {
 	private boolean success;
 	private String message;
 	private HistoryModel data;
+	
 	public boolean isSuccess() {
 		return success;
 	}
@@ -35,7 +35,4 @@ public class ResponseModel implements Serializable {
 	public void setData(HistoryModel data) {
 		this.data = data;
 	}
-	
-	
-
 }

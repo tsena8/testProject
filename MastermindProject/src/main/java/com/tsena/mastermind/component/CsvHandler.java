@@ -145,7 +145,6 @@ public class CsvHandler {
 			}
 			
 			reader.close();
-			
 			history.setGuessCombination(list);
 			return history;
 		} catch (FileNotFoundException fne) {
