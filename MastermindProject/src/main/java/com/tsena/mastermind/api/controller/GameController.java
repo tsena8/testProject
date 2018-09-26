@@ -45,13 +45,19 @@ public class GameController {
 	 * @return ResponseEntity
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public ResponseEntity<String> create() {
+	public ResponseEntity<Object> create() {
+		ResponseModel response = new ResponseModel();
+		
 		String gameId = UUID.randomUUID().toString();
+		
 		try {
 			gameService.initializeGame(gameId);
-			return new ResponseEntity<String>("Done", HttpStatus.OK);
+			response.setSuccess(true);
+			return new ResponseEntity<Object>(response, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.OK);
+			response.setSuccess(true);
+			response.setMessage(e.getMessage());
+			return new ResponseEntity<Object>(response, HttpStatus.OK);
 		}
 	}
 
@@ -61,11 +67,11 @@ public class GameController {
 	 * @return ResponseEntity
 	 */
 	@RequestMapping(value = "/send/{peg}", method = RequestMethod.GET)
-	public ResponseEntity<String> giveFeedbackOne(@PathVariable(value = "peg") PegColor peg) {
+	public ResponseEntity<Object> giveFeedbackOne(@PathVariable(value = "peg") PegColor peg) {
 		try {
-			return new ResponseEntity<String>("OK", HttpStatus.OK);
+			return new ResponseEntity<Object>("OK", HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	
 	}
@@ -79,17 +85,23 @@ public class GameController {
 	 * @return ResponseEntity
 	 */
 	@RequestMapping(value = "/guess/{peg1}/{peg2}/{peg3}/{peg4}", method = RequestMethod.GET)
-	public ResponseEntity<String> giveFeedback(@PathVariable(value = "peg1") PegColor peg1,
+	public ResponseEntity<Object> giveFeedback(@PathVariable(value = "peg1") PegColor peg1,
 			@PathVariable(value = "peg2") PegColor peg2,
 			@PathVariable(value = "peg3") PegColor peg3,
 			@PathVariable(value = "peg4") PegColor peg4 ) {
-
+		
+		ResponseModel response = new ResponseModel();
 		List<PegColor> pegs = asList(peg1, peg2, peg3, peg4);
+		
 		try {
 			String feedback = gameService.giveFeedback(pegs);
-			return new ResponseEntity<String>(feedback, HttpStatus.OK);
+			response.setSuccess(true);
+			response.setMessage(feedback);
+			return new ResponseEntity<Object>(response, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			response.setSuccess(true);
+			response.setMessage(e.getMessage());
+			return new ResponseEntity<Object>(response, HttpStatus.BAD_REQUEST);
 		}
 	
 	}
